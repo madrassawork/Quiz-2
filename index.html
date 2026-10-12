@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ml"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>തഫ്ഖീം & തർഖീഖ് ക്വിസ്</title>
+<style>
+:root{--bg:#f6f1f7;--card:#fff;--ink:#2a1a30;--mut:#6d5a74;--p:#6b2a7a;--ok:#1f8a4c;--bad:#c0392b;--gold:#e0a82e;--line:#d9c9de;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1c1220;--card:#2a1b30;--ink:#f3e9f5;--mut:#b9a5c0;--p:#c58ad6;--line:#4a3553}}
+:root[data-theme="dark"]{--bg:#1c1220;--card:#2a1b30;--ink:#f3e9f5;--mut:#b9a5c0;--p:#c58ad6;--line:#4a3553}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans Malayalam","Manjari","Kartika",system-ui,sans-serif;line-height:1.6}
+.w{max-width:560px;margin:0 auto;padding:16px}
+.ar{font-family:"Amiri","Scheherazade New","Noto Naskh Arabic",serif;font-size:2.2rem;direction:rtl;line-height:1.5}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;margin-top:14px}
+h1{font-size:1.5rem;margin:8px 0}
+.top{display:flex;justify-content:space-between;align-items:center;font-weight:600}
+.bar{height:10px;background:var(--line);border-radius:6px;overflow:hidden;margin-top:10px}
+#tb{height:100%;width:100%;background:var(--p);transition:width .1s linear}
+button{font:inherit;cursor:pointer}
+.opt{display:block;width:100%;text-align:left;margin-top:10px;padding:12px 14px;border:2px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink)}
+.opt:focus-visible,.go:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.opt.ok{border-color:var(--ok);background:rgba(31,138,76,.15)}
+.opt.bad{border-color:var(--bad);background:rgba(192,57,43,.15)}
+.go{margin-top:14px;padding:12px 22px;border:0;border-radius:10px;background:var(--p);color:#fff;font-weight:700}
+.exp{margin-top:12px;color:var(--mut)}
+.big{font-size:3rem;font-weight:800;color:var(--p)}
+.tag{display:inline-block;background:var(--gold);color:#2a1a30;border-radius:8px;padding:2px 10px;font-weight:700}
+</style></head><body><div class="w" id="app"></div>
+<script>
+var Q=[
+{q:"അറബി അക്ഷരങ്ങളെ ഉച്ചാരണത്തിൽ എത്ര രീതിയിൽ തരം തിരിക്കാം?",o:["രണ്ട്","മൂന്ന്","നാല്","അഞ്ച്"],a:1,e:"തഫ്ഖീം, തർഖീഖ്, രണ്ടും ചെയ്യാവുന്നവ എന്നിങ്ങനെ മൂന്ന് രീതി."},
+{q:"അക്ഷരത്തിന്റെ ഉച്ചാരണത്തിന്റെ മുഴക്കം കാരണം വായ നിറയുന്ന അവസ്ഥയ്ക്ക് പറയുന്ന പേര്?",o:["തർഖീഖ്","ഇസ്തിഫാൽ","തഫ്ഖീം","ഇസ്തിഅ്‌ലാഅ്"],a:2,e:"സ്വരഭാരത്തോടെ ഉച്ചരിക്കുന്നതാണ് തഫ്ഖീം."},
+{q:"എപ്പോഴും തഫ്ഖീം ചെയ്ത് ഉച്ചരിക്കേണ്ട അക്ഷരങ്ങൾ എത്ര?",o:["3","5","7","10"],a:2,e:"ഇസ്തിഅ്‌ലാഇന്റെ 7 അക്ഷരങ്ങൾ: خُصَّ ضَغْطٍ قِظْ."},
+{q:"തഫ്ഖീമിന്റെ 7 അക്ഷരങ്ങൾ ഓർക്കാനുള്ള വാക്യം ഏത്?",o:["خُصَّ ضَغْطٍ قِظْ","قُطْبُ جَدٍّ","ءَامَنُوا","نَصَرَ"],a:0,e:"خ ص ض غ ط ق ظ എന്നിവയാണ് ഈ വാക്യത്തിലെ അക്ഷരങ്ങൾ."},
+{q:"ഇനിയുള്ളവയിൽ ഇസ്തിഅ്‌ലാഇന്റെ അക്ഷരം ഏത്?",o:["ب","ت","ص","س"],a:2,e:"ص ഇസ്തിഅ്‌ലാഇന്റെ അക്ഷരമാണ്."},
+{q:"ഇസ്തിഅ്‌ലാഅ് എന്നത് കൊണ്ട് ഉദ്ദേശിക്കുന്നത് എന്ത്?",o:["ചുണ്ടുകൾ അടയുന്നത്","നാവിന്റെ പിൻവശം ഉയരുന്നത്","തൊണ്ട അടയുന്നത്","മൂക്കിലൂടെ ശബ്ദം വരുന്നത്"],a:1,e:"ഉച്ചരിക്കുമ്പോൾ നാവിന്റെ പിൻവശം ഉയരുന്നതാണ് ഇസ്തിഅ്‌ലാഅ്."},
+{q:"വിശേഷിച്ചും സ്വരഭാരത്തോടെ ഉച്ചരിക്കേണ്ട നാലക്ഷരങ്ങൾ ഏവ?",o:["ط ظ ص ض","خ غ ق ط","ر ل ا ب","ص ض ق غ"],a:0,e:"ط، ظ، ص، ض എന്നീ നാലക്ഷരങ്ങൾ."},
+{q:"ഇസ്തിഅ്‌ലാഇന്റെ അക്ഷരങ്ങൾക്ക് ഉച്ചാരണത്തിൽ എത്ര അവസ്ഥകളുണ്ട്?",o:["മൂന്ന്","നാല്","അഞ്ച്","ആറ്"],a:2,e:"അഞ്ച് അവസ്ഥകൾ: അലിഫ്, ഫതഹ്, ദമ്മ്, സുകൂൻ, കസ്റ."},
+{q:"ഏറ്റവും കൂടുതൽ തഫ്ഖീം നൽകപ്പെടുന്നത് ഏത് സന്ദർഭത്തിൽ?",o:["കസ്റ നൽകുമ്പോൾ","സുകൂൻ നൽകുമ്പോൾ","അലിഫ് നൽകി ദീർഘിപ്പിക്കുമ്പോൾ","ദമ്മ് നൽകുമ്പോൾ"],a:2,e:"അലിഫ് നൽകി ദീർഘിപ്പിക്കുമ്പോഴാണ് ഏറ്റവും കൂടുതൽ."},
+{q:"ഏറ്റവും കുറഞ്ഞ തഫ്ഖീം നൽകപ്പെടുന്നത് എപ്പോൾ?",o:["ഫതഹ് നൽകുമ്പോൾ","കസ്റ നൽകുമ്പോൾ","ദമ്മ് നൽകുമ്പോൾ","അലിഫ് നൽകുമ്പോൾ"],a:1,e:"കസ്റ നൽകി ഉച്ചരിക്കുമ്പോൾ ഏറ്റവും കുറഞ്ഞ തഫ്ഖീം."},
+{q:"ഫതഹ് നൽകി ഉച്ചരിക്കുമ്പോൾ തഫ്ഖീം എങ്ങനെയാണ്?",o:["പൂർണമായ തഫ്ഖീം","തഫ്ഖീം ഇല്ല","ഏറ്റവും കുറഞ്ഞത്","തർഖീഖ് ആണ്"],a:0,e:"ഫതഹ് നൽകുമ്പോൾ പൂർണമായ തഫ്ഖീം ചെയ്യുന്നു."},
+{q:"എപ്പോഴും നേരിയ സ്വരത്തിൽ (തർഖീഖ്) ഉച്ചരിക്കേണ്ട അക്ഷരങ്ങൾ അറിയപ്പെടുന്നത്?",o:["ഇസ്തിഅ്‌ലാഅ്","ഇസ്തിഫാൽ","ഇദ്ഗാം","ഇഖ്ഫാഅ്"],a:1,e:"ഇസ്തിഅ്‌ലാഇന്റെ അക്ഷരങ്ങൾ കഴിച്ച് ബാക്കി എല്ലാം ഇസ്തിഫാലിന്റെ അക്ഷരങ്ങളാണ്."},
+{q:"തഫ്ഖീമോ തർഖീഖോ ചെയ്യാവുന്ന അക്ഷരങ്ങൾ ഏവ?",o:["ا ل ر","ب ت ث","ص ض ط","ك م ن"],a:0,e:"അലിഫ്, ലാം, റാഅ് എന്നീ മൂന്ന് അക്ഷരങ്ങൾ."},
+{q:"അലിഫ് തഫ്ഖീം ചെയ്യണമോ തർഖീഖ് ചെയ്യണമോ എന്ന് നിശ്ചയിക്കുന്നത് എങ്ങനെ?",o:["എപ്പോഴും തഫ്ഖീം","എപ്പോഴും തർഖീഖ്","തൊട്ടു മുമ്പുള്ള അക്ഷരത്തെ പിന്തുടരും","ശബ്ദം കൂട്ടി"],a:2,e:"അലിഫ് തൊട്ടു മുമ്പുള്ള അക്ഷരത്തെ പിന്തുടരുന്നു."},
+{q:"قَالَ എന്നതിലെ അലിഫ് എങ്ങനെ ഉച്ചരിക്കും?",o:["തർഖീഖ്","തഫ്ഖീം","ഇഖ്ഫാഅ്","ഇദ്ഗാം"],a:1,e:"മുമ്പുള്ള ق തഫ്ഖീമിന്റെ അക്ഷരമായതിനാൽ അലിഫും തഫ്ഖീം."},
+{q:"اَلنَّاسِ എന്നതിലെ അലിഫ് എങ്ങനെ ഉച്ചരിക്കും?",o:["തഫ്ഖീം","തർഖീഖ്","സ്വരഭാരത്തോടെ","പൂർണ തഫ്ഖീം"],a:1,e:"മുമ്പുള്ള ن തർഖീഖിന്റെ അക്ഷരമായതിനാൽ അലിഫും തർഖീഖ്."}
+];
+var T=15,i=0,sc=0,st=0,best=0,tm,left,done=false,app=document.getElementById("app");
+function esc(s){return s}
+function start(){i=0;sc=0;st=0;best=0;next()}
+function home(){app.innerHTML='<h1>തഫ്ഖീം & തർഖീഖ് ക്വിസ്</h1><div class="ar" style="text-align:center">التَّفْخِيمُ وَ التَّرْقِيقُ</div><div class="card"><p>'+Q.length+' ചോദ്യങ്ങൾ. ഓരോന്നിനും '+T+' സെക്കൻഡ്. വേഗത്തിൽ ഉത്തരം നൽകിയാൽ കൂടുതൽ പോയിന്റ്, തുടർച്ചയായ ശരിക്ക് ബോണസും.</p><button class="go" onclick="start()">ക്വിസ് തുടങ്ങുക</button></div>'}
+function next(){
+ if(i>=Q.length)return fin();
+ var q=Q[i];done=false;left=T;
+ var h='<div class="top"><span>'+(i+1)+' / '+Q.length+'</span><span>⭐ '+sc+'</span><span>🔥 '+st+'</span></div><div class="bar"><div id="tb"></div></div><div class="card"><div class="tag">ഈ ചോദ്യത്തിന്: 100 പോയിന്റ് + വേഗത ബോണസ് (പരമാവധി 200)</div><div style="font-weight:700;margin-top:10px">'+q.q+'</div>';
+ q.o.forEach(function(o,k){h+='<button class="opt'+(/[\u0600-\u06FF]/.test(o)&&o.length<9?' ar':'')+'" data-k="'+k+'">'+o+'</button>'});
+ h+='<div id="fb"></div></div>';
+ app.innerHTML=h;
+ app.querySelectorAll(".opt").forEach(function(b){b.onclick=function(){pick(+b.dataset.k)}});
+ clearInterval(tm);var t0=Date.now();
+ tm=setInterval(function(){left=T-(Date.now()-t0)/1000;document.getElementById("tb").style.width=Math.max(0,left/T*100)+"%";if(left<=0){pick(-1)}},100);
+}
+function pick(k){
+ if(done)return;done=true;clearInterval(tm);
+ var q=Q[i],ok=k===q.a,bs=app.querySelectorAll(".opt");
+ bs.forEach(function(b,n){b.disabled=true;if(n===q.a)b.classList.add("ok");else if(n===k)b.classList.add("bad")});
+ var msg;
+ if(ok){var sp=Math.round(Math.max(0,left)/T*100);st++;best=Math.max(best,st);var sb=st>1?(st-1)*20:0;var p=100+sp+sb;sc+=p;msg='✅ ശരി! +'+p+' പോയിന്റ് (അടിസ്ഥാനം 100 + വേഗത '+sp+(sb?' + തുടർച്ച '+sb:'')+')'}
+ else{st=0;msg=(k<0?'⏰ സമയം കഴിഞ്ഞു':'❌ തെറ്റ്')+' · 0 പോയിന്റ്'}
+ document.getElementById("fb").innerHTML='<div class="exp"><b>'+msg+'</b><br>'+q.e+'</div><button class="go" id="nx">'+(i+1<Q.length?'അടുത്തത്':'ഫലം കാണുക')+'</button>';
+ var n=document.getElementById("nx");n.onclick=function(){i++;next()};n.focus();
+}
+function fin(){
+ var max=Q.length*200,pc=Math.round(sc/max*100),m=pc>=70?'മാഷാ അല്ലാഹ്! മികച്ച പ്രകടനം 🎉':pc>=40?'നല്ല ശ്രമം! ഒന്നുകൂടി പഠിച്ച് ശ്രമിക്കൂ.':'പാഠം ഒന്നുകൂടി വായിച്ച് വീണ്ടും ശ്രമിക്കൂ.';
+ app.innerHTML='<h1>ക്വിസ് പൂർത്തിയായി</h1><div class="card" style="text-align:center"><div class="big">'+sc+'</div><div>ആകെ പോയിന്റ് (അടിസ്ഥാന പരമാവധി '+Q.length*200+')</div><p><span class="tag">ഏറ്റവും നീണ്ട തുടർച്ച: '+best+'</span></p><p>'+m+'</p><button class="go" onclick="start()">വീണ്ടും കളിക്കുക</button></div>';
+}
+home();
+</script></body></html>
